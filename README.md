@@ -1,5 +1,3 @@
-# 🌸 ASHAR
-
 <div align="center">
 
 **ArpanSource's Hyprland Arch Rice**
@@ -7,7 +5,7 @@
 *A beautifully crafted Hyprland desktop environment for Arch Linux*
 
 [![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org/)
-[![Hyprland](https://img.shields.io/badge/Hyprland-00AAFF?style=for-the-badge&logo=wayland&logoColor=white)](https://hyprland.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland-00AAFF?style=for-the-badge&logo=hyprland&logoColor=white)](https://hyprland.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 [Features](#-features) • [Screenshots](#-screenshots) • [Installation](#-installation) • [Keybindings](#%EF%B8%8F-keybindings) • [Customization](#-customization)
