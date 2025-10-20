@@ -14,9 +14,16 @@
 
 ---
 
-## 📸 Screenshots
 
-> *Add your rice screenshots here*
+
+##    Screenshots
+
+<div align="center">
+
+![Deepspace Theme](screenshots/deepspace.png)
+*ASHAR featuring the Deepspace color scheme*
+
+</div>
 
 <details>
 <summary>Click to view more screenshots</summary>
@@ -25,198 +32,74 @@
 
 </details>
 
-## ✨ Features
+## 🎯 Philosophy
 
-- 🎨 **Beautiful Aesthetics** - Carefully chosen color schemes and themes
-- ⚡ **Performance** - Optimized for speed and efficiency
-- 🔧 **Modular Configuration** - Easy to customize and extend
-- 🎯 **Productive Workflow** - Intuitive keybindings and workspace management
-- 🌈 **Eye Candy** - Smooth animations and modern UI elements
+**ASHAR** is a **performance-focused, terminal-centric** Arch Linux rice built for developers who value speed over bells and whistles. This setup embraces **minimalism as a feature**, not a limitation—every component is chosen for efficiency and performance.
 
-## 🛠️ Components
+### Core Principles
 
-| Component | Name | Description |
-|-----------|------|-------------|
-| **WM** | [Hyprland](https://hyprland.org/) | Dynamic tiling Wayland compositor |
-| **Bar** | [Waybar](https://github.com/Alexays/Waybar) | Highly customizable status bar |
-| **Terminal** | [Kitty](https://sw.kovidgoyal.net/kitty/) | GPU-accelerated terminal emulator |
-| **Shell** | [Zsh](https://www.zsh.org/) | Powerful shell with Oh-My-Zsh |
-| **Launcher** | [Rofi](https://github.com/lbonn/rofi) (Wayland fork) | Application launcher & window switcher |
-| **Notifications** | [Mako](https://github.com/emersion/mako) | Lightweight notification daemon |
-| **File Manager** | [Thunar](https://docs.xfce.org/xfce/thunar/start) | Modern file manager |
-| **Editor** | [Neovim](https://neovim.io/) / [Zed](https://zed.dev/) | Text editors |
-| **Browser** | [Brave](https://brave.com/) | Privacy-focused browser |
-| **Lock Screen** | [Swaylock-effects](https://github.com/mortie/swaylock-effects) | Screen locker with effects |
+- **🚀 Performance First** - Lightweight, blazing-fast applications that don't waste resources
+- **⌨️ Terminal-Centric** - TUI over GUI wherever possible. The terminal is your home
+- **🎨 Aesthetic Minimalism** - Beautiful doesn't mean bloated. Clean, focused, distraction-free
+- **⚡ Developer-Optimized** - Built by developers, for developers. Fast compile times, instant feedback
+- **🔧 Intentional Choices** - Every app serves a purpose. No redundancy, no bloat
 
-## 📋 Requirements
+## 💡 Why ASHAR?
 
-### Mandatory
-- Arch Linux (or Arch-based distro)
-- Hyprland
-- Waybar
-- Kitty
-- Rofi (Wayland fork)
+This isn't your typical eye-candy rice with animations and transparency everywhere. ASHAR is designed for:
 
-### Optional
-- Zsh & Oh-My-Zsh
-- Mako
-- Swaylock-effects
-- Thunar
-- Neovim/Zed
+- Developers who **live in the terminal**
+- Users who prefer **keyboard over mouse**
+- Systems where **every millisecond matters**
+- Workflows that demand **maximum efficiency**
 
-## 🚀 Installation
+If you want fancy effects and GPU-intensive animations, look elsewhere. If you want a **snappy, responsive system** that gets out of your way and lets you work, you're in the right place.
 
-### Quick Install
+## 🎨 Features
 
-```bash
-# Clone the repository
-git clone https://github.com/arpansource/ashar.git
-cd ashar
+- 🖥️ **TUI-First Approach** - Terminal applications are prioritized for speed and efficiency
+- ⚡ **Performance Optimized** - Carefully selected lightweight alternatives to bloated software
+- 🎯 **Developer Workflow** - Keybindings and tools optimized for coding and productivity
+- 🌈 **Minimal Aesthetics** - Clean, focused interface without unnecessary visual clutter
+- 🔋 **Resource Efficient** - Perfect for older hardware or extending battery life
+- ⌨️ **Keyboard-Driven** - Mouse usage minimized, everything accessible via keybindings
 
-# Make the install script executable
-chmod +x install.sh
+## 🚀 Performance-Focused Application Stack
 
-# Run the installation
-./install.sh
-```
+ASHAR replaces common resource-heavy applications with lightweight, performant alternatives:
 
-### Manual Installation
+| Instead of... | ASHAR uses... | Why? |
+|---------------|---------------|------|
+| Chrome / Firefox | **Brave** | Privacy-focused, faster, less RAM usage |
+| VSCode / Cursor / Windsurf | **Zed** | Native performance, instant startup, minimal memory footprint |
+| GNOME Terminal / Konsole | **Alacritty** | GPU-accelerated, fastest terminal emulator available |
+| Node.js | **Bun** | 3x faster runtime, drop-in replacement with better performance |
+| Electron Apps | **Native Alternatives** | No bloated web wrappers, true native performance |
 
-<details>
-<summary>Click to expand manual installation steps</summary>
+### TUI Applications (Terminal User Interface)
 
-1. **Install Dependencies**
-```bash
-# Essential packages
-sudo pacman -S hyprland waybar kitty rofi-wayland mako dunst \
-               thunar polkit-gnome swaylock-effects \
-               brightnessctl pamixer playerctl \
-               grim slurp wl-clipboard cliphist
+Where others use GUI apps, ASHAR leverages powerful TUI alternatives:
 
-# Optional packages
-sudo pacman -S zsh neovim btop fastfetch \
-               network-manager-applet blueman
-```
+- **btop** - System monitor (replaces GUI task managers)
+- **lazygit** - Git interface (replaces GitKraken, GitHub Desktop)
+- **ranger/yazi** - File manager (TUI alternative to GUI file browsers)
+- **ncmpcpp** - Music player (lightweight audio control)
+- **newsboat** - RSS reader (stays in terminal)
 
-2. **Install AUR packages**
-```bash
-# Using yay
-yay -S swww hyprpicker-git
-```
+> **Note:** You're free to install heavier alternatives (Chrome, VSCode, etc.) anytime. ASHAR simply provides optimized defaults.
 
-3. **Backup existing configs**
-```bash
-# Backup your current configs (if any)
-mkdir -p ~/.config/backup
-cp -r ~/.config/hypr ~/.config/backup/
-cp -r ~/.config/waybar ~/.config/backup/
-# ... backup other configs as needed
-```
+## ⚙️ Who Is This For?
 
-4. **Copy configurations**
-```bash
-# Copy all configs
-cp -r .config/* ~/.config/
-cp -r .local/* ~/.local/
-cp -r wallpapers ~/Pictures/
-```
+### ✅ Perfect For:
+- Backend developers and systems programmers
+- DevOps engineers and sysadmins
+- Power users who live in the terminal
+- Users with older hardware seeking modern performance
+- Anyone tired of bloated development environments
+- Minimalists who appreciate functional beauty
 
-5. **Set Zsh as default shell**
-```bash
-chsh -s $(which zsh)
-```
-
-6. **Reboot or restart Hyprland**
-```bash
-# Logout and login to Hyprland
-# Or press Super + Shift + E (exit Hyprland)
-```
-
-</details>
-
-## ⌨️ Keybindings
-
-### General
-
-| Key Combination | Action |
-|----------------|--------|
-| `Super + Return` | Open terminal (Kitty) |
-| `Super + Q` | Close active window |
-| `Super + D` | Open app launcher (Rofi) |
-| `Super + E` | Open file manager |
-| `Super + F` | Toggle fullscreen |
-| `Super + Space` | Toggle floating mode |
-| `Super + Shift + E` | Exit Hyprland |
-| `Super + L` | Lock screen |
-
-### Window Management
-
-| Key Combination | Action |
-|----------------|--------|
-| `Super + H/J/K/L` | Move focus (Vim keys) |
-| `Super + Shift + H/J/K/L` | Move window |
-| `Super + Ctrl + H/J/K/L` | Resize window |
-| `Super + 1-9` | Switch to workspace 1-9 |
-| `Super + Shift + 1-9` | Move window to workspace 1-9 |
-| `Super + Mouse Left` | Move window |
-| `Super + Mouse Right` | Resize window |
-
-### Screenshot
-
-| Key Combination | Action |
-|----------------|--------|
-| `Print` | Screenshot (full screen) |
-| `Super + Print` | Screenshot (select area) |
-| `Super + Shift + Print` | Screenshot (active window) |
-
-### Media Controls
-
-| Key Combination | Action |
-|----------------|--------|
-| `XF86AudioPlay` | Play/Pause |
-| `XF86AudioNext` | Next track |
-| `XF86AudioPrev` | Previous track |
-| `XF86AudioRaiseVolume` | Volume up |
-| `XF86AudioLowerVolume` | Volume down |
-| `XF86AudioMute` | Toggle mute |
-| `XF86MonBrightnessUp` | Brightness up |
-| `XF86MonBrightnessDown` | Brightness down |
-
-## 🎨 Customization
-
-### Changing Theme Colors
-
-Edit `~/.config/hypr/colors.conf`:
-```conf
-$background = rgb(1e1e2e)
-$foreground = rgb(cdd6f4)
-$accent = rgb(89b4fa)
-# ... modify colors as needed
-```
-
-### Changing Wallpaper
-
-```bash
-# Using swww
-swww img ~/Pictures/wallpapers/your-wallpaper.jpg --transition-type fade
-```
-
-### Waybar Customization
-
-Edit `~/.config/waybar/config` and `~/.config/waybar/style.css` to customize your bar.
-
-### Terminal Font & Colors
-
-Edit `~/.config/kitty/kitty.conf` to change terminal appearance.
-
-## 📁 Directory Structure
-
-```
-ashar/
-├── .config/
-│   ├── hypr/              # Hyprland configuration
-│   │   ├── hyprland.conf
-│   │   ├── colors.conf
-│   │   └── keybindings.conf
-│   ├── waybar/            # Waybar configuration
-│   ├
+### ❌ Not For:
+- Users who prefer GUI-heavy workflows
+- People seeking maximum visual effects and animations
+- First-time Linux users (intermediate knowledge recommended)
+- Those who need Adobe Creative Suite or Windows-only software
