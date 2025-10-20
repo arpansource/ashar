@@ -1,6 +1,6 @@
 <div align="center">
 
-**ArpanSource's Hyprland Arch Rice**
+**ASHAR**
 
 *A beautifully crafted Hyprland desktop environment for Arch Linux*
 
@@ -13,7 +13,7 @@
 </div>
 
 ---
-
+**ASHAR** - **A**rpan**S**ource's **H**yprland **A**rch **R**ice, is a **performance-focused, terminal-centric** Arch Linux rice built for developers who value speed over bells and whistles. This setup embraces **minimalism as a feature**, not a limitation—every component is chosen for efficiency and performance.
 
 
 ##    Screenshots
@@ -32,9 +32,6 @@
 
 </details>
 
-## 🎯 Philosophy
-
-**ASHAR** is a **performance-focused, terminal-centric** Arch Linux rice built for developers who value speed over bells and whistles. This setup embraces **minimalism as a feature**, not a limitation—every component is chosen for efficiency and performance.
 
 ### Core Principles
 
