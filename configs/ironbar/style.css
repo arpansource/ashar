@@ -1,0 +1,200 @@
+@import "./gradient-bg.css";
+
+* {
+    background-color: transparent;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+#bar {
+    background-color: transparent;
+    margin: 10px 10px 0px 10px;
+}
+
+button,
+.window-title,
+.btn,
+.sysinfo {
+    min-width: 32px;
+    padding: 0;
+    border-radius: 8px;
+    border: 0.2px solid white;
+    color: white;
+    box-shadow: none;
+}
+
+button:hover,
+.btn:hover,
+.window-title:hover {
+    background: linear-gradient(
+        0deg,
+        #656565,
+        #464646,
+        #262626,
+        #262626,
+        #262626
+    );
+}
+
+.workspaces > button {
+    margin-left: 5px;
+}
+
+#end button,
+#end .btn,
+.clock,
+#end .sys_info_chip {
+    margin-right: 5px;
+}
+
+#end .screenshot-button button {
+    margin-right: 0px;
+}
+
+/* Network Module Styling */
+.network-module {
+    border-radius: 8px;
+    padding: 0 12px;
+    margin-right: 5px;
+    color: white;
+    font-size: 14px;
+}
+
+.network-module label {
+    color: white;
+}
+/*brightnessctl -m | awk -F, '{print $4}'*/
+.network-button,
+.music-button,
+.sys_info_chip,
+.clock,
+.cpu-button,
+.btn {
+    padding: 0 6px;
+}
+
+.window-title {
+    padding: 0 5px;
+    margin-left: 5px;
+}
+
+.backlight-button {
+    min-width: 50px;
+}
+
+.music-button {
+    padding-left: 0;
+}
+
+.music-module-wrapper {
+    border-radius: 8px;
+    padding: 0;
+}
+
+.music-module-wrapper button {
+    padding: 0 10px;
+    color: white;
+    font-size: 12px;
+}
+
+/* volume */
+/* Volume Module - Minimal Button Style */
+.volume {
+    padding: 0 6px;
+    min-width: 50px;
+}
+.popup-volume button {
+    background: transparent;
+}
+.popup-volume {
+    border-radius: 8px;
+}
+
+.popup-volume .device-box {
+    margin: 6px;
+}
+
+/*bluetooth*/
+.bluetooth {
+    padding: 0 6px;
+}
+.popup-bluetooth {
+    min-height: 14em;
+    min-width: 24em;
+    border-radius: 8px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+.popup-bluetooth .header {
+    padding-bottom: 1em;
+    margin-bottom: 0.6em;
+    color: white;
+    border-bottom: 1px solid black;
+}
+
+.popup-bluetooth .header .label {
+    margin-left: 0.8em;
+}
+
+.popup-bluetooth .disabled .spinner {
+    min-width: 2em;
+    min-height: 2em;
+    padding: 0.4em;
+}
+
+.popup-bluetooth .devices .box .device {
+    margin-bottom: 0.4em;
+}
+
+.popup-bluetooth .devices .icon {
+    min-width: 2.5em;
+    min-height: 2.5em;
+    margin-right: 0.8em;
+}
+
+.popup-bluetooth .devices .box .device .status .footer-label {
+    font-size: 0.8em;
+}
+
+.popup-bluetooth .devices .box .device .spinner {
+    min-width: 1.5em;
+    min-height: 1.5em;
+    margin: 0.5em;
+}
+
+/* clock */
+.popup-clock {
+    min-width: 280px;
+    border-radius: 15px;
+    padding: 10px 20px 20px 20px;
+    font-size: 20px;
+}
+
+.popup-clock .calendar-clock {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.popup-clock .calendar {
+    border: none;
+}
+
+.popup-clock .calendar.view {
+    border-radius: 8px;
+}
+
+.popup-clock .calendar .header {
+    font-size: 16px;
+    min-height: 40px;
+}
+
+.popup-clock .calendar:selected {
+    border-radius: 2px;
+}
+
+/* custom theme toggler */
+.toggle-ironbar-theme {
+    margin-right: 6px;
+}

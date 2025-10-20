@@ -1,0 +1,182 @@
+{
+  "position": "top",
+  "height": 40,
+  "start": [
+    {
+      "type": "custom",
+      "class": "launcher-icon",
+      "bar": [
+        {
+          "type": "button",
+          "name": "launcher-btn",
+          "label": ".",
+          "on_click": "!tofi-drun --drun-launch=true"
+        }
+      ]
+    },
+    {
+      "type": "workspaces",
+      "class": "workspaces",
+      "all_monitors": false
+    },
+    {
+      "type": "script",
+      "name": "active-window-title",
+      "cmd": "~/.config/ironbar/scripts/active_window_title.sh",
+      "mode": "watch",
+      "class": "btn window-title"
+    }
+  ],
+  "center": [
+    {
+      "type": "custom",
+      "tooltip": "Update ironbar theme",
+      "bar": [
+        {
+          "type": "button",
+          "name": "toggle-ironbar-theme-button",
+          "label": ".",
+          "class": "toggle-ironbar-theme",
+          "on_click": "!alacritty -e ~/.config/ironbar/scripts/gradients.sh"
+        }
+      ]
+    },
+    {
+      "type": "clock",
+      "format": "%b %d, %Y - %I:%M %p",
+      "format_popup": "%I:%M %p"
+    }
+  ],
+  "end": [
+    {
+      "type": "tray",
+      "direction": "h",
+      "prefer_theme_icon": false
+    },
+    {
+      "type": "custom",
+      "bar": [
+        {
+          "type": "button",
+          "name": "cpu-button",
+          "on_click": "!alacritty -e btop",
+          "widgets": [
+            {
+              "class": "cpu-button",
+              "format": ["  {cpu_percent}%"],
+              "interval": {
+                "cpu": 5
+              },
+              "type": "sys_info"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "format": ["  {memory_used} / {memory_total} GB"],
+      "interval": {
+        "memory": 30
+      },
+      "type": "sys_info",
+      "class": "sys_info_chip",
+      "tooltip": "RAM usage"
+    },
+    {
+      "type": "bluetooth",
+      "icon_size": 32,
+      "format": {
+        "not_found": "",
+        "disabled": " Off",
+        "enabled": " On",
+        "connected": " {device_alias}",
+        "connected_battery": " {device_alias} • {device_battery_percent}%"
+      },
+      "popup": {
+        "scrollable": true,
+        "header": " Enable Bluetooth",
+        "disabled": "{adapter_status}",
+        "device": {
+          "header": "{device_alias}",
+          "header_battery": "{device_alias}",
+          "footer": "{device_status}",
+          "footer_battery": "{device_status} • Battery {device_battery_percent}%"
+        }
+      },
+      "adapter_status": {
+        "not_found": "No Bluetooth adapters found",
+        "enabled": "Bluetooth enabled",
+        "enabling": "Enabling Bluetooth...",
+        "disabled": "Bluetooth disabled",
+        "disabling": "Disabling Bluetooth..."
+      },
+      "device_status": {
+        "connected": "Connected",
+        "connecting": "Connecting...",
+        "disconnected": "Disconnect",
+        "disconnecting": "Disconnecting..."
+      }
+    },
+    {
+      "type": "volume",
+      "format": "{icon} {percentage}%",
+      "max_volume": 100,
+      "truncate": "middle",
+      "on_scroll_up": "brightnessctl s +5%",
+      "on_scroll_down": "brightnessctl s 5%-",
+      "icons": {
+        "volume_high": "󰕾",
+        "volume_medium": "󰖀",
+        "volume_low": "󰕿",
+        "muted": "󰝟"
+      }
+    },
+    {
+      "type": "script",
+      "cmd": "~/.config/ironbar/scripts/brightness.sh",
+      "mode": "watch",
+      "class": "backlight-button btn",
+      "on_scroll_up": "brightnessctl s +5%",
+      "on_scroll_down": "if [ $(brightnessctl g) -gt $(($(brightnessctl m) * 5 / 100)) ]; then brightnessctl s 5%-; fi"
+    },
+    {
+      "type": "custom",
+      "class": "network-module-wrapper",
+      "bar": [
+        {
+          "type": "button",
+          "name": "network-button",
+          "class": "btn",
+          "on_click": "!alacritty -e impala",
+          "widgets": [
+            {
+              "type": "script",
+              "cmd": "~/.config/ironbar/scripts/network.sh",
+              "mode": "poll",
+              "interval": 1000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "script",
+      "name": "battery-button",
+      "cmd": "~/.config/ironbar/scripts/battery.sh",
+      "mode": "watch",
+      "class": "btn battery-btn"
+    },
+    {
+      "type": "custom",
+      "class": "screenshot-button",
+      "bar": [
+        {
+          "type": "button",
+          "name": "screenshot-btn",
+          "label": ".",
+          "on_click": "!~/.config/ironbar/scripts/screenshot.sh"
+        }
+      ]
+    }
+  ]
+}
