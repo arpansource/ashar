@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Define your wallpaper directory
-WALLPAPER_DIR="$HOME/.config/wallpapers"
+WALLPAPER_DIR="$HOME/ashar/configs/wallpapers"
 
 # 1. Check if swww-daemon is running
 if ! pgrep -x "swww-daemon" > /dev/null; then
