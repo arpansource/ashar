@@ -1,28 +1,37 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PKG_DIR="$DOTFILES_DIR/packages" # all the installers for packages live in this directory
-
-echo "Instaling paru if not already installed"
-bash $PKG_DIR/paru.sh
+PKG_DIR="$DOTFILES_DIR/packages"
 
 echo ""
 echo "================================"
 echo "=   ASHAR Dotfiles Installer   ="
 echo "================================"
+echo ""
 
+# Make sure the system is up to date
+sudo pacman -Syu
+
+# Always install base first
+bash "$PKG_DIR/base.sh"
+
+# Then paru
+bash "$PKG_DIR/paru.sh"
+
+# Then loop over the rest of the packages
 for script in "$PKG_DIR"/*.sh; do
-    if [ "$(basename "$script")" != "paru.sh" ]; then
-        name=$(basename "$script" .sh)
-        echo ""
-        echo "→ Installing $name..."
-
-        bash "$script"
-    fi
+    case "$(basename "$script")" in
+        base.sh|paru.sh)
+            continue ;; # skip base and paru
+        *)
+            name=$(basename "$script" .sh)
+            echo ""
+            echo "→ Installing $name..."
+            bash "$script"
+            ;;
+    esac
 done
-
 
 echo ""
 echo "=== All packages installed ==="
@@ -32,4 +41,4 @@ echo ""
 echo "→ Applying config symlinks..."
 bash "$DOTFILES_DIR/link.sh"
 
-echo "✅ Done! Now you can reboot the system"
+echo "✅ Done!"
