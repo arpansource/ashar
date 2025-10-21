@@ -3,6 +3,7 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 PKG_DIR="$DOTFILES_DIR/packages"
+PACKAGE_LIST_FILE="$DOTFILES_DIR/package-list.txt"
 
 echo ""
 echo "================================"
@@ -11,33 +12,30 @@ echo "================================"
 echo ""
 
 # Make sure the system is up to date
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 
-# Always install base first
-bash "$PKG_DIR/base.sh"
+# Read packages from package-list.txt (comma-separated)
+# Read and clean packages from the comma-separated list
+mapfile -t PACKAGES < <(tr -d '\r\n' < "$PACKAGE_LIST_FILE" | tr ',' '\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
-# Then paru
-bash "$PKG_DIR/paru.sh"
+# Loop over packages in the order defined
+for name in "${PACKAGES[@]}"; do
+    script="$PKG_DIR/$name.sh"
+    if [[ ! -f "$script" ]]; then
+        echo "❌  Error: Installer for $name not found at $script"
+        exit 1
+    fi
 
-# Then loop over the rest of the packages
-for script in "$PKG_DIR"/*.sh; do
-    case "$(basename "$script")" in
-        base.sh|paru.sh)
-            continue ;; # skip base and paru
-        *)
-            name=$(basename "$script" .sh)
-            echo ""
-            echo "→ Installing $name..."
-            bash "$script"
-            ;;
-    esac
+    echo ""
+    echo "→ Installing $name..."
+    bash "$script"
 done
 
 echo ""
 echo "=== All packages installed ==="
 echo ""
 
-# Now apply symlinks
+# Apply symlinks
 echo "→ Applying config symlinks..."
 bash "$DOTFILES_DIR/link.sh"
 
