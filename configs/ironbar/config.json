@@ -50,6 +50,7 @@
   "end": [
     {
       "type": "tray",
+      "class": "btn tray-btn",
       "direction": "h",
       "prefer_theme_icon": false
     },

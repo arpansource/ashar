@@ -43,6 +43,7 @@ button:hover,
 #end button,
 #end .btn,
 .clock,
+.tray-btn,
 #end .sys_info_chip {
     margin-right: 5px;
 }
