@@ -3,4 +3,4 @@ set -euo pipefail
 
 echo "→ Installing base dependencies (git, base-devel)..."
 
-sudo pacman -S --needed --noconfirm git base-devel iwd 
+sudo pacman -S --needed --noconfirm git base-devel iwd fzf curl unzip
