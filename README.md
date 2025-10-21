@@ -100,3 +100,8 @@ Where others use GUI apps, ASHAR leverages powerful TUI alternatives:
 - People seeking maximum visual effects and animations
 - First-time Linux users (intermediate knowledge recommended)
 - Those who need Adobe Creative Suite or Windows-only software
+
+
+### KNOWN Quirks
+- If zed fails starting try running it with --foreground option `zed . --foreground`
+- If the logs show -- `Unable to init GPU context: Platform(Init(ERROR_INITIALIZATION_FAILED))` then try installing vulkan drivers for you Graphic. for intel -- `vulkan-intel`
