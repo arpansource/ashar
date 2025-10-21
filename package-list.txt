@@ -1,1 +1,1 @@
-base,paru,node,brave,grim,brightnessctl,hyprland,impala,nvim,satty,slurp,tofi,wbg,yazi,zed,ironbar
+base,paru,alacritty,node,brave,grim,brightnessctl,hyprland,impala,nvim,satty,slurp,tofi,wbg,yazi,zed,ironbar
