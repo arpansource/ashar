@@ -2,33 +2,40 @@
 set -euo pipefail
 
 REPO_URL="https://raw.githubusercontent.com/arpansource/ashar/main/packages"
-BASE_PACKAGES="$REPO_URL/base.sh"
-SETUP_GIT="$REPO_URL/git.sh"
-
-LOCAL_ASHAR_DIR="$HOME/ashar"
-
+ASHAR_DIR="$HOME/ashar"
 
 download_and_run() {
   local script_url=$1
   local tmp_script
   tmp_script=$(mktemp)
+  echo "→ Running $(basename "$script_url") ..."
   curl -fsSL "$script_url" -o "$tmp_script"
   bash "$tmp_script"
   rm -f "$tmp_script"
 }
 
-# upgrade the system
+# Upgrade system
+echo "→ Upgrading system..."
 sudo pacman -Syu --noconfirm
 
-# install base packages
+# Install base packages
 download_and_run "$REPO_URL/base.sh"
 
-# install and setup git
+# Install and setup git
 download_and_run "$REPO_URL/git.sh"
 
-rm -rf "$ASHAR_DIR"
+# Clean up old clone if it exists
+if [ -d "$ASHAR_DIR" ]; then
+  echo "→ Cleaning up old repo..."
+  rm -rf "$ASHAR_DIR"
+fi
+
+# Clone fresh repo
+echo "→ Cloning latest ashar repo..."
 git clone https://github.com/arpansource/ashar.git "$ASHAR_DIR"
 
-cd ashar
+# Run installer
+echo "→ Running installer..."
+bash "$ASHAR_DIR/installer.sh"
 
-bash "$LOCAL_ASHAR_DIR/installer.sh"
+echo "✅ Ashar setup complete!"
