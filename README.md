@@ -35,7 +35,7 @@
 ### Installation
 - Make sure you have curl installed
 ```bash
-sudo pacman -S curl
+sudo pacman -S curl --needed
 ```
 - Run the installer script
 ```bash
