@@ -38,4 +38,7 @@ git clone https://github.com/arpansource/ashar.git "$ASHAR_DIR"
 echo "→ Running installer..."
 bash "$ASHAR_DIR/installer.sh"
 
+
+
+
 echo "✅ Ashar setup complete!"

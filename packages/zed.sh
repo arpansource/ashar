@@ -35,5 +35,3 @@ else
   echo "❌ Zed installation failed. Please check your PATH or rerun the script."
   exit 1
 fi
-
-

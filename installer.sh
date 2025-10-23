@@ -38,5 +38,3 @@ echo ""
 # Apply symlinks
 echo "→ Applying config symlinks..."
 bash "$DOTFILES_DIR/link.sh"
-
-echo "✅ Done!"
