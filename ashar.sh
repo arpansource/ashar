@@ -16,13 +16,9 @@ bash "$BASE_PACKAGES"
 # install and setup git
 bash "$SETUP_GIT"
 
-if [ -d "$LOCAL_ASHAR_DIR" ]; then
-  echo "Cleaning up..."
-  rm -rf $LOCAL_ASHAR_DIR
+rm -rf "$ASHAR_DIR"
+git clone https://github.com/arpansource/ashar.git "$ASHAR_DIR"
 
-  git clone https://github.com/arpansource/ashar.git
+cd ashar
 
-  cd ashar
-
-  bash "$LOCAL_ASHAR_DIR/installer.sh"
-fi
+bash "$LOCAL_ASHAR_DIR/installer.sh"
