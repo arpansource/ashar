@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Install Git
-paru -S git --needed --noconfirm
+sudo pacman -S git --needed --noconfirm
 
 echo ""
 echo "================================"
