@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-paru -S tofi --needed
+paru -S tofi --needed --noconfirm

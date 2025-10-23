@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-paru -S satty --needed
+paru -S satty --needed --noconfirm

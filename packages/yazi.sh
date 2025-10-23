@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-paru -S yazi --needed
+paru -S yazi --needed --noconfirm

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if ! command -v hyprland &>/dev/null; then
-    paru -S --needed hyprland
+    paru -S --needed --noconfirm hyprland
 else
     echo "✅ Hyprland is already installed."
 fi

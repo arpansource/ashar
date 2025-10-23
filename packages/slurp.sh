@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-paru -S slurp --needed
+paru -S slurp --needed --noconfirm

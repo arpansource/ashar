@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-paru -S impala --needed
+paru -S impala --needed --noconfirm

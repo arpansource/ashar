@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 set -euo pipefail
-paru -S ironbar --needed
+paru -S ironbar --needed --noconfirm
