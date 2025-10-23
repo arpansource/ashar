@@ -32,6 +32,15 @@
 
 </details>
 
+### Installation
+- Make sure you have curl installed
+```bash
+sudo pacman -S curl
+```
+- Run the installer script
+```bash
+curl -fsSL https://raw.githubusercontent.com/arpansource/ashar/main/ashar.sh | bash
+```
 
 ### Core Principles
 
