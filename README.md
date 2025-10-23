@@ -67,8 +67,7 @@ If you want fancy effects and GPU-intensive animations, look elsewhere. If you w
 - ⚡ **Performance Optimized** - Carefully selected lightweight alternatives to bloated software
 - 🎯 **Developer Workflow** - Keybindings and tools optimized for coding and productivity
 - 🌈 **Minimal Aesthetics** - Clean, focused interface without unnecessary visual clutter
-- 🔋 **Resource Efficient** - Perfect for older hardware or extending battery life
-- ⌨️ **Keyboard-Driven** - Mouse usage minimized, everything accessible via keybindings
+- 🔋 **Resource Efficient** - Perfect for older hardware
 
 ## 🚀 Performance-Focused Application Stack
 
@@ -79,18 +78,14 @@ ASHAR replaces common resource-heavy applications with lightweight, performant a
 | Chrome / Firefox | **Brave** | Privacy-focused, faster, less RAM usage |
 | VSCode / Cursor / Windsurf | **Zed** | Native performance, instant startup, minimal memory footprint |
 | GNOME Terminal / Konsole | **Alacritty** | GPU-accelerated, fastest terminal emulator available |
-| Node.js | **Bun** | 3x faster runtime, drop-in replacement with better performance |
-| Electron Apps | **Native Alternatives** | No bloated web wrappers, true native performance |
+| Dolphin / Thunar / GNOME Files | **Yazi** | Async, rust based terminal file manager |
 
 ### TUI Applications (Terminal User Interface)
 
 Where others use GUI apps, ASHAR leverages powerful TUI alternatives:
 
 - **btop** - System monitor (replaces GUI task managers)
-- **lazygit** - Git interface (replaces GitKraken, GitHub Desktop)
-- **ranger/yazi** - File manager (TUI alternative to GUI file browsers)
-- **ncmpcpp** - Music player (lightweight audio control)
-- **newsboat** - RSS reader (stays in terminal)
+- **yazi** - File manager (TUI alternative to GUI file browsers)
 
 > **Note:** You're free to install heavier alternatives (Chrome, VSCode, etc.) anytime. ASHAR simply provides optimized defaults.
 
@@ -109,8 +104,3 @@ Where others use GUI apps, ASHAR leverages powerful TUI alternatives:
 - People seeking maximum visual effects and animations
 - First-time Linux users (intermediate knowledge recommended)
 - Those who need Adobe Creative Suite or Windows-only software
-
-
-### KNOWN Quirks
-- If zed fails starting try running it with --foreground option `zed . --foreground`
-- If the logs show -- `Unable to init GPU context: Platform(Init(ERROR_INITIALIZATION_FAILED))` then try installing vulkan drivers for you Graphic. for intel -- `vulkan-intel`
