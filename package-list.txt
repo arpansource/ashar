@@ -1,1 +1,1 @@
-paru,vulkan,alacritty,mako,node,brave,grim,brightnessctl,hyprland,impala,nvim,satty,slurp,tofi,wbg,yazi,zed,ironbar,ly
+paru,fonts,vulkan,alacritty,mako,node,brave,grim,brightnessctl,hyprland,impala,nvim,satty,slurp,tofi,wbg,yazi,zed,ironbar,ly
