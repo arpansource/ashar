@@ -19,7 +19,7 @@ paru -S ly --needed --noconfirm
 options=("none" "doom" "colormix" "matrix")
 
 echo "🎨 Select a background animation for ly:"
-animation=$(printf "%s\n" "${options[@]}" | fzf --prompt="Choose animation: " --height=10 --border --ansi)
+animation=$(printf "%s\n" "${options[@]}" | fzf --prompt="Choose animation: " --height=10 --border --ansi </dev/tty)
 
 if [[ -z "$animation" ]]; then
   echo "No selection made. Defaulting to 'none'."
