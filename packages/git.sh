@@ -18,14 +18,14 @@ git config --global init.defaultBranch main
 
 # Ask for username and email if not already set
 if ! git config --global user.name >/dev/null; then
-    read -rp "Enter your Git username: " GIT_NAME
+    read -rp "Enter your Git username: " GIT_NAME </dev/tty
     git config --global user.name "$GIT_NAME"
 else
     echo "✓ Git username already set to: $(git config --global user.name)"
 fi
 
 if ! git config --global user.email >/dev/null; then
-    read -rp "Enter your Git email: " GIT_EMAIL
+    read -rp "Enter your Git email: " GIT_EMAIL </dev/tty
     git config --global user.email "$GIT_EMAIL"
 else
     echo "✓ Git email already set to: $(git config --global user.email)"
@@ -41,7 +41,7 @@ echo "✓ Basic Git configuration complete."
 
 # --- Optional SSH key setup ---
 echo ""
-read -rp "Would you like to generate an SSH key for GitHub authentication? (y/N): " GEN_KEY
+read -rp "Would you like to generate an SSH key for GitHub authentication? (y/N): " GEN_KEY </dev/tty
 
 if [[ "$GEN_KEY" =~ ^[Yy]$ ]]; then
     SSH_DIR="$HOME/.ssh"
@@ -54,7 +54,7 @@ if [[ "$GEN_KEY" =~ ^[Yy]$ ]]; then
         echo "⚠️  SSH key already exists at: $DEFAULT_KEY"
     else
         echo ""
-        read -rp "Enter your GitHub email (for SSH key comment): " SSH_EMAIL
+        read -rp "Enter your GitHub email (for SSH key comment): " SSH_EMAIL </dev/tty
         ssh-keygen -t ed25519 -C "$SSH_EMAIL" -f "$DEFAULT_KEY" -N ""
         echo ""
         echo "✅ SSH key generated successfully."
