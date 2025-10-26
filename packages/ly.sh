@@ -15,16 +15,16 @@ fi
 # Install ly
 paru -S ly --needed --noconfirm
 
-# Background options
 options=("none" "doom" "colormix" "matrix")
 
 echo "🎨 Select a background animation for ly:"
-animation=$(printf "%s\n" "${options[@]}" | fzf --prompt="Choose animation: " --height=10 --border --ansi </dev/tty)
+animation=$(printf "%s\n" "${options[@]}" | fzf --prompt="Choose animation: " --height=10 --border --ansi < /dev/tty > /dev/tty)
 
 if [[ -z "$animation" ]]; then
   echo "No selection made. Defaulting to 'none'."
   animation="none"
 fi
+
 
 # Conditionally install cmatrix
 if [[ "$animation" == "matrix" ]]; then
