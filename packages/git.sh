@@ -32,7 +32,7 @@ else
 fi
 
 # Other useful defaults
-git config --global core.editor "nano"
+git config --global core.editor "nvim"
 git config --global pull.rebase false
 git config --global color.ui auto
 
