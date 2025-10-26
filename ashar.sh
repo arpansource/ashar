@@ -24,11 +24,9 @@ download_and_run "$REPO_URL/base.sh"
 # Install and setup git
 download_and_run "$REPO_URL/git.sh"
 
-# Clean up old clone if it exists
-if [ -d "$ASHAR_DIR" ]; then
-  echo "→ Cleaning up old repo..."
-  rm -rf "$ASHAR_DIR"
-fi
+# Clean up old clone
+echo "→ Cleaning up old repo..."
+rm -rf "$ASHAR_DIR"
 
 # Clone fresh repo
 echo "→ Cloning latest ashar repo..."
