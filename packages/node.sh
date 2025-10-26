@@ -30,9 +30,5 @@ fnm install 22
 fnm default 22
 fnm use 22
 
-# Enable pnpm via Corepack
-echo "→ Enabling pnpm..."
-corepack enable pnpm
-
 echo ""
-echo "✅ fnm and Node.js 22 with pnpm setup successfully."
+echo "✅ fnm and Node.js 22 setup successfully."
