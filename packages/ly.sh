@@ -21,8 +21,8 @@ echo "🎨 Select a background animation for ly:"
 animation=$(printf "%s\n" "${options[@]}" | fzf --prompt="Choose animation: " --height=10 --border --ansi)
 
 if [[ -z "$animation" ]]; then
-  echo "No selection made. Defaulting to 'none'."
-  animation="none"
+  echo "No selection made. Defaulting to 'matrix'."
+  animation="matrix"
 fi
 
 
