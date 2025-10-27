@@ -9,7 +9,7 @@ if [[ ! "$INSTALL_DOCKER" =~ ^[Yy]$ ]]; then
 fi
 
 # === 2. install docker ===
-paru -S docker --needed --noconfirm
+paru -S docker docker-compose --needed --noconfirm
 
 
 # === 3. enable docker service ===
