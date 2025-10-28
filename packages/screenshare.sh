@@ -31,20 +31,16 @@ EOF
 
 echo "→ Configured preferred portal: $CONFIG_DIR/portals.conf"
 
-# === 4. Restart services ===
-echo "→ Restarting PipeWire and portal services..."
-systemctl --user daemon-reload
-systemctl --user restart pipewire pipewire-pulse wireplumber
-systemctl --user restart xdg-desktop-portal xdg-desktop-portal-hyprland
 
-# === 5. Verify status ===
-sleep 1
-if systemctl --user is-active --quiet xdg-desktop-portal-hyprland; then
-  echo "✅ xdg-desktop-portal-hyprland is active."
+# Check if we're in a Wayland session
+if [ -n "${WAYLAND_DISPLAY-}" ]; then
+  echo "🎨 Wayland session detected → restarting services..."
+  systemctl --user restart pipewire pipewire-pulse wireplumber xdg-desktop-portal xdg-desktop-portal-hyprland
+  echo "✅ Services restarted successfully!"
 else
-  echo "❌ Failed to start xdg-desktop-portal-hyprland."
-  echo "Run 'systemctl --user status xdg-desktop-portal-hyprland' for details."
-  exit 1
+  echo "⚠️ No Wayland session detected (running in TTY)."
+  echo "➡️ Skipping portal service restart — they will auto-start when you launch Hyprland."
 fi
+
 
 echo -e "\n🎉 Screen sharing setup completed successfully!"
