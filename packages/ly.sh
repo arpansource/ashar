@@ -36,7 +36,7 @@ config_file="/etc/ly/config.ini"
 
 if [[ -f "$config_file" ]]; then
   echo "🛠 Updating $config_file → animation=$animation"
-  sudo sed -i "s/^animation=.*/animation=$animation/" "$config_file"
+  sudo sed -i -E "s|^[#[:space:]]*animation[[:space:]]*=[[:space:]]*.*|animation = $animation|" "$config_file"
 else
   echo "⚠️ $config_file not found. Creating it..."
   echo "[General]" | sudo tee "$config_file" >/dev/null
