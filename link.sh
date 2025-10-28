@@ -5,7 +5,7 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/ashar/configs"
 
 # List of apps to symlink
-APPS=("hypr" "wallpapers" "alacritty" "mako" "ironbar" "tofi")
+APPS=("hypr" "wallpapers" "alacritty" "mako" "ironbar" "tofi" "xdg-desktop-portal")
 
 for app in "${APPS[@]}"; do
     src="$DOTFILES_DIR/$app"
