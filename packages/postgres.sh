@@ -1,89 +1,167 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
-DATA_DIR="/var/lib/postgres/data"
-PG_HBA="$DATA_DIR/pg_hba.conf"
 
 # === 1. Ask for installation ===
-read -rp "Do you want to setup PostgreSQL on this machine? (y/N): " INSTALL_PSQL </dev/tty
-if [[ ! "$INSTALL_PSQL" =~ ^[Yy]$ ]]; then
-    echo "Aborting PostgreSQL setup."
+read -rp "Do you want to setup postgresql on this machine? (y/N): " INSTALL_POSTGRES </dev/tty
+if [[ ! "$INSTALL_POSTGRES" =~ ^[Yy]$ ]]; then
+    echo "Aborting postgresql setup..."
     exit 0
 fi
 
-# === 2. Install PostgreSQL ===
-echo "→ Installing PostgreSQL..."
-paru -S postgresql --needed --noconfirm
+# Function to check if PostgreSQL is installed
+check_postgresql_installed() {
+    if pacman -Q postgresql >/dev/null 2>&1; then
+        echo "PostgreSQL is already installed."
+        return 0
+    else
+        echo "PostgreSQL is not installed. Installing..."
+        return 1
+    fi
+}
 
+# Function to install PostgreSQL using paru
+install_postgresql() {
+    if ! command -v paru >/dev/null 2>&1; then
+        echo "Paru is not installed. Please install paru first."
+        exit 1
+    fi
+    paru -S --noconfirm postgresql
+}
 
-# === 3. Handle data directory initialization ===
-if sudo -u postgres test -d "$DATA_DIR"; then
-    echo "⚠️  Data directory already exists at: $DATA_DIR"
-    read -rp "Do you want to reinitialize it (this will DELETE existing data)? (y/N): " REINIT </dev/tty
-    if [[ "$REINIT" =~ ^[Yy]$ ]]; then
-        echo "🗑️  Removing old data directory..."
+# Function to initialize PostgreSQL database (idempotent)
+initialize_postgresql() {
+    # Dynamically find the PostgreSQL data directory from the systemd service
+    DATA_DIR=$(systemctl cat postgresql 2>/dev/null | awk -F'=' '/^Environment=PGDATA/ {print $2}' | head -1)
+
+    # Fallback: If not found in service, search for an existing data directory or use default
+    if [ -z "$DATA_DIR" ]; then
+        # Try to find an existing data directory by looking for PG_VERSION in common locations
+        POSSIBLE_DIRS=("/var/lib/postgres/data" "/var/lib/pgsql/data")
+        for dir in "${POSSIBLE_DIRS[@]}"; do
+            if sudo test -f "$dir/PG_VERSION"; then
+                DATA_DIR="$dir"
+                break
+            fi
+        done
+        # If still not found, default to Arch's standard
+        if [ -z "$DATA_DIR" ]; then
+            DATA_DIR="/var/lib/postgres/data"
+        fi
+    fi
+
+    # Check if already initialized (using sudo to handle read-protected directory)
+    if sudo test -f "$DATA_DIR/PG_VERSION"; then
+        echo "PostgreSQL database already initialized at $DATA_DIR."
+        read -p "Do you want to re-initialize it? (y/N): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Skipping initialization."
+            return 0
+        fi
+        # Remove the existing data directory for re-initialization
+        echo "Removing existing data directory..."
         sudo rm -rf "$DATA_DIR"
-        echo "→ Initializing a new PostgreSQL data directory..."
-        sudo -iu postgres initdb --locale=en_US.UTF-8 -D "$DATA_DIR"
-    else
-        echo "⏩ Skipping initialization (keeping existing data)."
     fi
-else
-    echo "→ Initializing PostgreSQL data directory..."
-    sudo -iu postgres initdb --locale=en_US.UTF-8 -D "$DATA_DIR"
-fi
 
-# === 4. Start and enable service ===
-echo "→ Enabling and starting PostgreSQL service..."
-sudo systemctl enable postgresql --now
-
-# === 5. Set password for postgres user (always re-prompts safely) ===
-echo "→ Setting password for default 'postgres' user..."
-read -rsp "Enter new password for postgres user: " POSTGRES_PWD </dev/tty
-echo
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '${POSTGRES_PWD}';"
-
-# === 6. Optionally create another DB user ===
-read -rp "Do you want to create another database user? (y/N): " CREATE_USER </dev/tty
-if [[ "$CREATE_USER" =~ ^[Yy]$ ]]; then
-    read -rp "Enter new database username: " DB_USER </dev/tty
-    read -rsp "Enter password for ${DB_USER}: " DB_PASS </dev/tty
-    echo
-    EXISTS=$(sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='${DB_USER}';" || true)
-    if [[ "$EXISTS" == "1" ]]; then
-        echo "⚠️  User '${DB_USER}' already exists. Skipping."
-    else
-        sudo -u postgres psql -c "CREATE USER ${DB_USER} WITH PASSWORD '${DB_PASS}';"
-        echo "✅ User '${DB_USER}' created."
+    # If directory exists but not initialized, remove it (no prompt, as per your request)
+    if sudo test -d "$DATA_DIR"; then
+        echo "Removing uninitialized data directory at $DATA_DIR..."
+        sudo rm -rf "$DATA_DIR"
     fi
+
+    echo "Initializing PostgreSQL database at $DATA_DIR..."
+    sudo -u postgres initdb -D "$DATA_DIR"
+}
+
+# Function to start PostgreSQL service (idempotent)
+start_postgresql() {
+    if systemctl is-active --quiet postgresql; then
+        echo "PostgreSQL service is already running."
+        return 0
+    fi
+    echo "Starting PostgreSQL service..."
+    sudo systemctl start postgresql
+    sudo systemctl enable postgresql
+}
+
+# Function to set postgres user password (runs every time; consider making it optional)
+set_postgres_password() {
+    echo "Enter the password for the PostgreSQL 'postgres' user:"
+    read -s POSTGRES_PASSWORD
+    echo "Setting password for postgres user..."
+    sudo -u postgres psql -c "ALTER USER postgres PASSWORD '$POSTGRES_PASSWORD';" || {
+        echo "Failed to set password. PostgreSQL may not be running or accessible."
+        exit 1
+    }
+    echo "Password set successfully."
+}
+
+# Function to find and edit pg_hba.conf (idempotent)
+edit_pg_hba_conf() {
+    # Dynamically find the PostgreSQL data directory (same method as initialize_postgresql for consistency)
+    DATA_DIR=$(systemctl cat postgresql 2>/dev/null | awk -F'=' '/^Environment=PGDATA/ {print $2}' | head -1)
+
+    # Fallback: If not found in service, search for an existing data directory or use default
+    if [ -z "$DATA_DIR" ]; then
+        POSSIBLE_DIRS=("/var/lib/postgres/data" "/var/lib/pgsql/data")
+        for dir in "${POSSIBLE_DIRS[@]}"; do
+            if sudo test -f "$dir/PG_VERSION"; then
+                DATA_DIR="$dir"
+                break
+            fi
+        done
+        if [ -z "$DATA_DIR" ]; then
+            DATA_DIR="/var/lib/postgres/data"
+        fi
+    fi
+
+    PG_HBA_CONF="$DATA_DIR/pg_hba.conf"
+
+    # Check if the file exists (using sudo to handle read-protected files)
+    if ! sudo test -f "$PG_HBA_CONF"; then
+        echo "pg_hba.conf not found at $PG_HBA_CONF. Please check PostgreSQL installation."
+        exit 1
+    fi
+
+    # Check if the change is already applied (idempotent; using sudo for protected files)
+    if sudo grep -q "^local.*all.*all.*md5" "$PG_HBA_CONF"; then
+        echo "pg_hba.conf already configured for md5 authentication."
+        return 0
+    fi
+
+    echo "Editing $PG_HBA_CONF for password authentication..."
+
+    # Backup the original file
+    sudo cp "$PG_HBA_CONF" "$PG_HBA_CONF.bak"
+
+    # Change local connections to use md5 (password authentication)
+    # Note: This assumes a standard format; adjust the sed pattern if your file differs
+    sudo sed -i 's/^local.*all.*all.*trust/local   all             all                                     md5/' "$PG_HBA_CONF"
+
+    # Reload PostgreSQL to apply changes
+    sudo systemctl reload postgresql
+    echo "pg_hba.conf updated and PostgreSQL reloaded."
+}
+
+# Main script
+echo "PostgreSQL Setup Script for Arch Linux"
+
+# Check and install if necessary
+if ! check_postgresql_installed; then
+    install_postgresql
 fi
 
-# === 7. Configure authentication method ===
-if [[ ! -f "$PG_HBA" ]]; then
-    echo "❌ Could not find pg_hba.conf at $PG_HBA"
-    exit 1
-fi
+# Initialize database
+initialize_postgresql
 
-echo "🎨 Select an authentication method for PostgreSQL:"
-AUTH_METHOD=$(printf "md5\nscram-sha-256\n" | fzf --prompt="Choose authentication method: " --height=10 --border --ansi < /dev/tty > /dev/tty)
+# Start service
+start_postgresql
 
-if [[ -z "$AUTH_METHOD" ]]; then
-    AUTH_METHOD="md5"
-    echo "No selection made. Defaulting to 'md5'."
-fi
+# Set password
+set_postgres_password
 
-echo "→ Updating pg_hba.conf to use '$AUTH_METHOD'..."
-sudo cp "$PG_HBA" "$PG_HBA.bak"
+# Edit pg_hba.conf
+edit_pg_hba_conf
 
-sudo awk -v method="$AUTH_METHOD" '
-/^host/ { $NF = method }
-{ print }
-' "$PG_HBA.bak" | sudo tee "$PG_HBA" >/dev/null
-
-echo "🔐 Authentication method set to '$AUTH_METHOD'."
-sudo systemctl restart postgresql
-
-echo
-echo "✅ PostgreSQL setup complete!"
-echo "You can now connect using:"
-echo "  psql -U postgres -h localhost"
+echo "Setup complete. You should now be able to login to PostgreSQL using: psql -U postgres"

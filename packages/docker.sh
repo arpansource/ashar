@@ -26,6 +26,7 @@ sleep 2
 
 if sudo systemctl is-active --quiet docker; then
     echo "✅ Docker service is running."
+    echo "→ Adding current user to docker group"
 else
     echo "❌ Docker service failed to start. Showing logs:"
     sudo journalctl -u docker --no-pager -n 20
