@@ -1,14 +1,14 @@
 {
   "position": "top",
-  "height": 40,
+  "height": 30,
   "start": [
     {
       "type": "custom",
-      "class": "launcher-icon",
       "bar": [
         {
           "type": "button",
           "name": "launcher-btn",
+          "class": "square",
           "label": ".",
           "on_click": "!tofi-drun --drun-launch=true"
         }
@@ -36,7 +36,7 @@
           "type": "button",
           "name": "toggle-ironbar-theme-button",
           "label": ".",
-          "class": "toggle-ironbar-theme",
+          "class": "toggle-ironbar-theme square",
           "on_click": "!alacritty -e ~/.config/ironbar/scripts/gradients.sh"
         }
       ]
@@ -50,7 +50,6 @@
   "end": [
     {
       "type": "tray",
-      "class": "btn tray-btn",
       "direction": "h",
       "prefer_theme_icon": false
     },
@@ -63,7 +62,6 @@
           "on_click": "!alacritty -e btop",
           "widgets": [
             {
-              "class": "cpu-button",
               "format": ["  {cpu_percent}%"],
               "interval": {
                 "cpu": 5
@@ -142,7 +140,6 @@
     },
     {
       "type": "custom",
-      "class": "network-module-wrapper",
       "bar": [
         {
           "type": "button",
@@ -152,6 +149,7 @@
           "widgets": [
             {
               "type": "script",
+              "class": "square",
               "cmd": "~/.config/ironbar/scripts/network.sh",
               "mode": "poll",
               "interval": 1000
@@ -169,11 +167,11 @@
     },
     {
       "type": "custom",
-      "class": "screenshot-button",
       "bar": [
         {
           "type": "button",
           "name": "screenshot-btn",
+          "class": "square",
           "label": ".",
           "on_click": "!~/.config/ironbar/scripts/screenshot.sh"
         }

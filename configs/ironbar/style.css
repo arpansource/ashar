@@ -15,7 +15,6 @@ button,
 .window-title,
 .btn,
 .sysinfo {
-    min-width: 32px;
     padding: 0;
     border-radius: 8px;
     border: 0.2px solid white;
@@ -43,7 +42,6 @@ button:hover,
 #end button,
 #end .btn,
 .clock,
-.tray-btn,
 #end .sys_info_chip {
     margin-right: 5px;
 }
@@ -52,24 +50,10 @@ button:hover,
     margin-right: 0px;
 }
 
-/* Network Module Styling */
-.network-module {
-    border-radius: 8px;
-    padding: 0 12px;
-    margin-right: 5px;
-    color: white;
-    font-size: 14px;
-}
-
-.network-module label {
-    color: white;
-}
 /*brightnessctl -m | awk -F, '{print $4}'*/
-.network-button,
 .music-button,
 .sys_info_chip,
 .clock,
-.cpu-button,
 .btn {
     padding: 0 6px;
 }
@@ -198,4 +182,10 @@ button:hover,
 /* custom theme toggler */
 .toggle-ironbar-theme {
     margin-right: 6px;
+}
+
+.workspaces button,
+.square {
+    min-width: 30px;
+    min-height: 30px;
 }

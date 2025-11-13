@@ -66,7 +66,8 @@ if [ "$STATUS" == "connected" ]; then
     fi
 
     # 5. Output the status: Icon + SSID
-    echo "$ICON $SSID ($SIGNAL_PCT%)"
+    # echo "$ICON $SSID ($SIGNAL_PCT%)"
+    echo "$ICON"
 
 else
     # Not connected

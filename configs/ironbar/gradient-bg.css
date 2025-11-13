@@ -2,25 +2,25 @@ button,
 .window-title,
 .btn,
 .sysinfo {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
 
 .popup-volume {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
 
 .popup-bluetooth {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
 
 .popup-clock {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
 
 .popup-clock .calendar.view {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
 
 .popup-clock .calendar:selected {
-    background: linear-gradient(to right, #000000, #434343);
+    background: linear-gradient(90deg, #4b79a1, #283e51);
 }
