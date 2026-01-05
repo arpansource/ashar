@@ -3,24 +3,30 @@ button,
 .btn,
 .sysinfo {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }
 
 .popup-volume {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }
 
 .popup-bluetooth {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }
 
 .popup-clock {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }
 
 .popup-clock .calendar.view {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }
 
 .popup-clock .calendar:selected {
     background: linear-gradient(to right, #000000, #434343);
+    color: #000000;
 }

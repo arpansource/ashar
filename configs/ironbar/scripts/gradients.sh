@@ -10,6 +10,7 @@ GRADIENTS=(
     "Synthwave|linear-gradient(135deg, #483D8B, #FF0099)"
     "Twitch|linear-gradient(90deg, #6441a5, #2a0845)"
     "Virgin America|linear-gradient(to right, #7b4397, #dc2430)"
+    "SnowWhite|linear-gradient(to right, #ffffff, #e1e1e1)"
 )
 
 # Define the location of your Ironbar CSS file
