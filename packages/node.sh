@@ -10,7 +10,10 @@ if command -v fnm >/dev/null 2>&1; then
   echo "✅ fnm is already installed: $(fnm --version)"
 else
   echo "→ Installing fnm..."
-  curl -fsSL https://fnm.vercel.app/install | bash
+  if ! curl -fsSL https://fnm.vercel.app/install | bash; then
+    echo "❌ Failed to install fnm. Please check your network connection."
+    exit 1
+  fi
 fi
 
 # === 2. Check if fnm path setup exists in .bashrc ===

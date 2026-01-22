@@ -1,1 +1,1 @@
-paru,fonts,vulkan,alacritty,mako,bun,docker,postgres,node,brave,grim,slurp,brightnessctl,hyprland,impala,nvim,satty,tofi,wbg,yazi,zed,ironbar,screenshare,ly
+paru,fonts,vulkan,alacritty,mako,bun,docker,node,brave,grim,slurp,brightnessctl,hyprland,impala,nvim,satty,tofi,wbg,yazi,zed,ironbar,screenshare,ly

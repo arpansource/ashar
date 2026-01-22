@@ -8,7 +8,10 @@ if command -v zed &>/dev/null; then
 fi
 
 echo "🚀 Installing Zed..."
-curl -fsSL https://zed.dev/install.sh | sh
+if ! curl -fsSL https://zed.dev/install.sh | sh; then
+  echo "❌ Failed to install Zed. Please check your network connection."
+  exit 1
+fi
 
 if ! grep -q 'export PATH=\$HOME/.local/bin:\$PATH' ~/.bashrc; then
   echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc

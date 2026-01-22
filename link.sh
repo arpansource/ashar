@@ -11,10 +11,13 @@ for app in "${APPS[@]}"; do
     src="$DOTFILES_DIR/$app"
     dest="$HOME/.config/$app"
 
-    # Ensure parent directory exists
+    if [ ! -e "$src" ]; then
+        echo "⚠️  Source directory $src does not exist. Skipping..."
+        continue
+    fi
+
     mkdir -p "$(dirname "$dest")"
 
-    # Remove existing config if it's a dir/symlink
     if [ -e "$dest" ] || [ -L "$dest" ]; then
         echo "🗑️  Removing existing $dest"
         rm -rf "$dest"

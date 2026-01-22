@@ -8,6 +8,11 @@ fi
 
 echo "→ Installing paru..."
 
+if [ -d "/tmp/paru" ]; then
+    echo "→ Cleaning up existing /tmp/paru directory..."
+    rm -rf /tmp/paru
+fi
+
 git clone https://aur.archlinux.org/paru.git /tmp/paru
 (
     cd /tmp/paru

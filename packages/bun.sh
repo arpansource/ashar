@@ -48,7 +48,10 @@ fi
 # 5. Check if bun still not installed — then install it
 if ! is_bun_installed; then
   echo "⬇️ Installing Bun..."
-  curl -fsSL https://bun.sh/install | bash
+  if ! curl -fsSL https://bun.sh/install | bash; then
+    echo "❌ Failed to install Bun. Please check your network connection."
+    exit 1
+  fi
 fi
 
 # 6. Source updated .bashrc so it works immediately
